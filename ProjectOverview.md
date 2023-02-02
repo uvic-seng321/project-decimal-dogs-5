@@ -14,4 +14,5 @@ Additional features we wish to implement include the ability for tutors to chall
 <br/>
 
 ## Need for TutorUp
-TutorUp is needed as it is currently very difficult to find tutors, especially remote tutor offerings. People are searching for tutors in all different ways. Online, in person, and via university academic help centers.
+TutorUp is needed as it is currently very difficult to find tutors, especially remote tutor offerings. People are searching for tutors in all different ways. Online, in person, and via university academic help centers. TutorUp aims to eliminate any stress created from this process and allow university students to find tutors with ease.
+
