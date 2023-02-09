@@ -1,13 +1,13 @@
 # Assignment 2
 All elements of assignment 2 are linked below in the [decimal-dogs-5](https://github.com/uvic-seng321/project-decimal-dogs-5) GitHub repo :)
 ## Project Overview
-Project Overview is available via this link in GitHub: [ProjectOverview.md](https://github.com/uvic-seng321/project-decimal-dogs-5/blob/main/ProjectOverview.md)
+Project Overview is available via this link in GitHub: [Project Overview](https://github.com/uvic-seng321/project-decimal-dogs-5/blob/main/ProjectOverview.md)
 
 ## Project Vision
-Project Vision is available via this link in GitHub: [ProjectVision.md](https://github.com/uvic-seng321/project-decimal-dogs-5/blob/main/ProjectVision.md)
+Project Vision is available via this link in GitHub: [Project Vision](https://github.com/uvic-seng321/project-decimal-dogs-5/blob/main/ProjectVision.md)
 
 ## Story Map
-
+Story Map is available vai this link in GitHub: [Story Map]()
 
 ## Context Diagram
 The Context Diagram is available via this link in GitHub: [Context Diagram V1](https://github.com/uvic-seng321/project-decimal-dogs-5/blob/main/Context%20Diagram%20V1.png)
