@@ -20,4 +20,4 @@ User Story Cards are available via this link in GitHub issues: [User Stories](ht
 
 User stories are sorted into "Must Have", "Should Have", and "Could Have" categories. The most important stories have checklists in their descriptions to detail how we will determine they are complete. Priority rating is given in the form of "Difficulty Estimate", with 13 being the highest priority and 1 being the lowest. We will focus the entire "Must Have" category before we begin with the highest "Should Have" story.
 
-Data was collected via 
+Data was collected via scraping with [APIFY](https://apify.com/), raw data is available in .csv format in [issue 2](https://github.com/uvic-seng321/project-decimal-dogs-5/issues/2). Additionally, we referenced existing tutor sites such as [SuperProf](https://www.superprof.ca/lessons/all-tutors/victoria/), [Varsity Tutors](https://www.varsitytutors.com/ca/tutoring-victoria), and [Tutoring with a Twist](https://tutoringwithatwist.ca/victoria-tutoring/).
