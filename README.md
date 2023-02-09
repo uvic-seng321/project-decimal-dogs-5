@@ -17,3 +17,7 @@ The Stakeholder Map is available via this link in GitHub: [Stakeholder Map](http
 
 ## User Story Cards
 User Story Cards are available via this link in GitHub issues: [User Stories](https://github.com/orgs/uvic-seng321/projects/9/views/3)
+
+User stories are sorted into "Must Have", "Should Have", and "Could Have" categories. The most important stories have checklists in their descriptions to detail how we will determine they are complete. Priority rating is given in the form of "Difficulty Estimate", with 13 being the highest priority and 1 being the lowest. We will focus the entire "Must Have" category before we begin with the highest "Should Have" story.
+
+Data was collected via 
