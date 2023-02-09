@@ -1,5 +1,5 @@
 # Project Overview
-This is duplicated in README.md
+This is duplicated in [README.md](https://github.com/uvic-seng321/project-decimal-dogs-5/blob/main/README.md)
 
 ## [Project Vision](https://github.com/uvic-seng321/project-decimal-dogs-5/blob/main/ProjectVision.md)
 TutorUp strives to help university students connect with tutors to give them the skills they need to succeed in their classes. We wish to improve student grades and make the process of finding a tutor and finding people to tutor a simpler one. Our intended users consist primarily of university students, however career tutors or post-undergrad users are also welcome. We researched the need and the requirements for TutorUp from word of mouth stories and from the [r/uvic](https://www.reddit.com/user/uvic/) reddit page. Additionally, we researched existing tutor programs and applications, such as [Superprof](https://www.superprof.ca/).
