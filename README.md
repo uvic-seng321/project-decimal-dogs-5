@@ -1,5 +1,5 @@
 # Assignment 2
-All elements of assignment 2 are linked below in GitHub :)
+All elements of assignment 2 are linked below in the [decimal-dogs-5](https://github.com/uvic-seng321/project-decimal-dogs-5) GitHub repo :)
 ## Project Overview
 Project Overview is available via this link in GitHub: [ProjectOverview.md](https://github.com/uvic-seng321/project-decimal-dogs-5/blob/main/ProjectOverview.md)
 
