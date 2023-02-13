@@ -7,7 +7,7 @@ Project Overview is available via this link in GitHub: [Project Overview](https:
 Project Vision is available via this link in GitHub: [Project Vision](https://github.com/uvic-seng321/project-decimal-dogs-5/blob/main/ProjectVision.md)
 
 ## Story Map
-Story Map is available via this link in GitHub: [Story Map](https://github.com/uvic-seng321/project-decimal-dogs-5/blob/main/User%20StoryMap.png). While we will likley only complete two releases during Seng 321, there is planned content for four releases we will move up if there is extra time available to us.
+Story Map is available via this link in GitHub: [Story Map](https://github.com/uvic-seng321/project-decimal-dogs-5/blob/main/User%20StoryMap.png). While we will likely only complete two releases during Seng 321, there is planned content for three releases we will move up if there is extra time available to us.
 
 ## Context Diagram
 The Context Diagram is available via this link in GitHub: [Context Diagram V1](https://github.com/uvic-seng321/project-decimal-dogs-5/blob/main/Context%20Diagram%20V1.png)
