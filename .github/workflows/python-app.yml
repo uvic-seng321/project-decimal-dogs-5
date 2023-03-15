@@ -26,8 +26,8 @@ jobs:
     - name: Install dependencies
       run: |
         pip install --upgrade pip
-        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
-        pip install pytest==7.2.2
+        pip install -r tutorHub/server/requirements.txt
+#        # pip install pytest==7.2.2
 #     - name: Lint with flake8
 #       run: |
 #         # stop the build if there are Python syntax errors or undefined names
