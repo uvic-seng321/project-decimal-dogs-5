@@ -1,5 +1,63 @@
 from flask import Flask
+import mysql.connector
+import json
+import sys
+import yaml
+
+#  List of tables: Students, Tutors, Subjects, Bookings, SubjectsRelationship 
+accessible_tables = ("Students",
+                    "Tutors",
+                    "Subjects",
+                    "Bookings",
+                    "SubjectsRelationship")
+
 app = Flask(__name__)
+
+##Configure db
+# Load database credentials from db.yaml
+db = yaml.load(open('db.yaml'), Loader=yaml.FullLoader)
+# Connect to the database
+db = mysql.connector.connect(
+    host=db['mysql_host'], 
+    user=db['mysql_user'], 
+    password=db['mysql_password'], 
+    database=db['mysql_db']
+    )
+
+def send_query(query):
+    """Sends a query to the database and returns the result as a list of tuples"""
+    db.reconnect()
+    cur = db.cursor()
+    try:
+        cur.execute(query)
+        result = cur.fetchall()
+        return list(result)
+    except:
+        return 0
+def get_columns(table):
+    columns = []
+    query = f"SHOW COLUMNS FROM {table};"
+    result = send_query(query)
+    for column in result:
+        columns.append(column[0])
+    return columns
+
+
+def return_table(table):
+    """Returns all data from a table as a list of dictionaries which is returned as a JSON object"""
+
+    query = f"SELECT * FROM {table};"
+    # Execute the query
+    result = send_query(query)
+    # Get the column names
+    column_names = get_columns(table)
+    # Convert the result to a list of dictionaries (JSON object)
+    for i,row in enumerate(result):   
+        row = dict(zip(column_names, row))
+        result[i] = row
+    # return result
+    return json.dumps(result)
+    
 
 @app.route('/')
 def hello_world():
