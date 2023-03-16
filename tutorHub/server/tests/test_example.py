@@ -1,4 +1,4 @@
-from app import *
+from server.app import *
 
 def test_test_route():
     response = app.test_client().get('/')
