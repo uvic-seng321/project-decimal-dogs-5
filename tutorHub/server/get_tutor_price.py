@@ -5,4 +5,15 @@ import sys
 import yaml
 
 def getTutorPrice(id):
-    return False
+    db = mysql.connector.connect(
+    host='70.67.13.107', 
+    user='remote_user', 
+    password='Password1!', 
+    database='seng321'
+    )
+    db.reconnect()
+    cur = db.cursor()
+    query = f"SELECT * FROM Tutors WHERE tutorId = {id}"
+    cur.execute(query)
+    result = cur.fetchall()
+    return list(result)

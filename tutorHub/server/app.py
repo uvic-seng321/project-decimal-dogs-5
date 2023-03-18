@@ -57,6 +57,12 @@ def return_table(table):
         result[i] = row
     # return result
     return json.dumps(result)
+    
+@app.route('/getTutorPrice/<int:id>')
+# """Returns the tutor price"""
+def get_tutor_price(id):
+    data = getTutorPrice(id)
+    return json.dumps(data)
 
 
 @app.route('/')
