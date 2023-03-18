@@ -3,6 +3,7 @@ import mysql.connector
 import json
 import sys
 import yaml
+from get_tutor_price import getTutorPrice
 
 #  List of tables: Students, Tutors, Subjects, Bookings, SubjectsRelationship 
 accessible_tables = ("Students",
@@ -19,7 +20,7 @@ app = Flask(__name__)
 db = mysql.connector.connect(
     host='70.67.13.107', 
     user='remote_user', 
-    password='Password123#@!', 
+    password='Password1!', 
     database='seng321'
     )
 
@@ -56,7 +57,7 @@ def return_table(table):
         result[i] = row
     # return result
     return json.dumps(result)
-    
+
 
 @app.route('/')
 def hello_world():
