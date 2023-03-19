@@ -3,8 +3,7 @@ import mysql.connector
 import json
 import sys
 import yaml
-from get_tutor_price import getTutorPrice
-from set_tutor_price import setTutorPrice
+from tutor_price import getTutorPrice, setTutorPrice
 
 #  List of tables: Students, Tutors, Subjects, Bookings, SubjectsRelationship 
 accessible_tables = ("Students",
@@ -62,14 +61,14 @@ def return_table(table):
     return json.dumps(result)
     
 @app.route('/getTutorPrice/<int:id>')
-# """Returns the tutor price"""
 def get_tutor_price(id):
+    """Returns the tutor price"""
     data = getTutorPrice(id)
     return json.dumps(data)
 
 @app.route('/setTutorPrice/<int:id>/<float:price>')
-# """Sets the tutor price"""
 def set_tutor_price(id, price):
+    """Sets the tutor price"""
     data = setTutorPrice(id, price)
     return json.dumps(data)
 
