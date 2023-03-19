@@ -4,5 +4,4 @@ def test_get_tutor_price():
     price = str(response.data.decode())
     price = price.replace('[','').replace(']','').replace(' ', '').replace('"', '').split(',')
     priceString = price[3]
-    print("PRICE: " + priceString)
     assert priceString == "40.0"
