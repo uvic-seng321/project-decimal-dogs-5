@@ -29,5 +29,13 @@ jobs:
         pip install -r tutorHub/server/requirements.txt
     - name: Test with pytest
       run: python3 -m pytest
-    - name: Upload coverage reports to Codecov
-      uses: codecov/codecov-action@v3
+  codecov-flask:
+    name: Run CodeCov
+    needs: api
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/download-artifact@v2
+      - uses: codecov/codecov-action@v3
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
