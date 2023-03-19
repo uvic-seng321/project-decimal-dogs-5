@@ -4,6 +4,7 @@ import json
 import sys
 import yaml
 from get_tutor_price import getTutorPrice
+from set_tutor_price import setTutorPrice
 
 #  List of tables: Students, Tutors, Subjects, Bookings, SubjectsRelationship 
 accessible_tables = ("Students",
@@ -64,6 +65,12 @@ def return_table(table):
 # """Returns the tutor price"""
 def get_tutor_price(id):
     data = getTutorPrice(id)
+    return json.dumps(data)
+
+@app.route('/setTutorPrice/<int:id>/<float:price>')
+# """Sets the tutor price"""
+def set_tutor_price(id, price):
+    data = setTutorPrice(id, price)
     return json.dumps(data)
 
 
