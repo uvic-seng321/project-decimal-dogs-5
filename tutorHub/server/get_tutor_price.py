@@ -4,7 +4,7 @@ import json
 import sys
 import yaml
 
-def getTutorPrice(id):
+def getTutorPrice(tutor_id):
     db = mysql.connector.connect(
     host='70.67.13.107', 
     user='remote_user', 
@@ -14,7 +14,7 @@ def getTutorPrice(id):
 
     db.reconnect()
     cur = db.cursor()
-    query = f"SELECT * FROM Tutors WHERE tutorId = {id}"
+    query = f"SELECT * FROM Tutors WHERE tutorId = {tutor_id}"
     cur.execute(query)
     price = list(cur.fetchall())
     return price[0][3]
