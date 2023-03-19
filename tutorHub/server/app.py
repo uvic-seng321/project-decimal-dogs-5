@@ -1,8 +1,9 @@
-from flask import Flask
+from flask import Flask, request
 import mysql.connector
 import json
 import sys
 import yaml
+from availability import get_schedule, add_single_booking
 
 #  List of tables: Students, Tutors, Subjects, Bookings, SubjectsRelationship 
 accessible_tables = ("Students",
@@ -19,7 +20,7 @@ app = Flask(__name__)
 db = mysql.connector.connect(
     host='70.67.13.107', 
     user='remote_user', 
-    password='Password123#@!', 
+    password='Password1!', 
     database='seng321'
     )
 
@@ -33,6 +34,7 @@ def send_query(query):
         return list(result)
     except:
         return 0
+    
 def get_columns(table):
     columns = []
     query = f"SHOW COLUMNS FROM {table};"
@@ -55,12 +57,20 @@ def return_table(table):
         row = dict(zip(column_names, row))
         result[i] = row
     # return result
-    return json.dumps(result)
+    return result
     
 
 @app.route('/')
 def hello_world():
     return "Hello, World!"
+
+@app.route('/getAvailability/<tutor_id>')
+def get_availability(tutor_id):
+    return get_schedule(tutor_id)
+
+@app.route('/addBooking', methods = ['POST'])
+def add_booking():
+    return add_single_booking(request)
 
 def create_app():
     app = Flask(__name__)
