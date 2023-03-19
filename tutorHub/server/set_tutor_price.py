@@ -14,8 +14,7 @@ def setTutorPrice(tutor_id, price):
 
     db.reconnect()
     cur = db.cursor()
-    query = "UPDATE Tutors SET price = %s WHERE tutorId = %s"
-    val = (price, tutor_id)
-    cur.execute(query, val)
+    query = f"UPDATE Tutors SET price = {price} WHERE tutorId = {tutor_id}"
+    cur.execute(query)
     db.commit()
     return {"Status_code": 200}
