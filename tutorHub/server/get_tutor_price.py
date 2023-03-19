@@ -11,9 +11,10 @@ def getTutorPrice(id):
     password='Password1!', 
     database='seng321'
     )
+
     db.reconnect()
     cur = db.cursor()
     query = f"SELECT * FROM Tutors WHERE tutorId = {id}"
     cur.execute(query)
-    result = cur.fetchall()
-    return list(result)
+    price = list(cur.fetchall())
+    return price[0][3]

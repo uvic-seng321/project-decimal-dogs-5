@@ -34,6 +34,8 @@ def send_query(query):
         return list(result)
     except:
         return 0
+
+
 def get_columns(table):
     columns = []
     query = f"SHOW COLUMNS FROM {table};"
