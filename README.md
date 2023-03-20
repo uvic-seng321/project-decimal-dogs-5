@@ -22,11 +22,12 @@ User stories are sorted into "Must Have", "Should Have", and "Could Have" catego
 
 Data was collected via scraping with [APIFY](https://apify.com/), raw data is available in .csv format in [issue 2](https://github.com/uvic-seng321/project-decimal-dogs-5/issues/2). Additionally, we referenced existing tutor sites such as [SuperProf](https://www.superprof.ca/lessons/all-tutors/victoria/), [Varsity Tutors](https://www.varsitytutors.com/ca/tutoring-victoria), and [Tutoring with a Twist](https://tutoringwithatwist.ca/victoria-tutoring/) to get requirements related to more detailed website features such as tutor filters.
 
-# Assignment 3
+# Assignment 4
 All elements of assignment 2 are linked below in the [decimal-dogs-5](https://github.com/uvic-seng321/project-decimal-dogs-5) GitHub repo :)
 
 ## Must Have User Stories
 The list of must have user stories and the acceptence criteria for each: [Must Have's](https://github.com/uvic-seng321/project-decimal-dogs-5/labels/Must%20have)
+![image](https://user-images.githubusercontent.com/91294558/226221490-3f01677a-8b40-4805-bc49-5bdcbd99a3ca.png)
 
 
 ## Tracability Matrix
