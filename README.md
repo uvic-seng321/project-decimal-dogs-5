@@ -141,6 +141,44 @@ def test_student_exists():
     
     assert stu_id == 1
 ```
+
+##Integration Tests
+##Integrating getting tutor price and setting tutor price. 
+Code: 
+```python
+from app import * 
+#Tutor's 1 price is 30.0, then 10 is added and is set as Tutor 2's price
+#This integration test checks both getTutorPrice and setTutorPrice functionality
+def test_integration_tutor_price():
+    response = app.test_client().get('/getTutorPrice/1')
+    response = eval(response.data.decode()) + 10
+    app.test_client().get('/setTutorPrice/2/' + str(response))
+    assert str(getTutorPrice(2)) == "40.0"
+```
+
+###Integrating booking functionality with tutor availability
+Code:
+```python
+from app import *
+from datetime import datetime
+
+def test_add_booking():
+    date = datetime.now()
+
+    data_json = {
+        "tutorID": 1,
+        "studentID": 1,
+        "date": date.strftime("%Y-%m-%d %H:%M:%S"),
+        "startTime": "10:00",
+        "endTime": "11:00"
+    }
+
+    app.test_client().post('/addBooking', json=data_json)
+    result = app.test_client().get('/getAvailability/1')
+    
+    assert date.strftime("%d %b %Y") in result.data.decode()
+```    
+
 ## Tracability Matrix
 | User Stories | test_get_tutor_price.py | test_set_tutor_price.py | test_add_booking.py | test_get_availability.py | test_get_subjects.py | test_show_subject.py | test_student_exists.py |
 |--------------|-----------------------|------------------------|---------------------|--------------------------|-----------------------|----------------------|-------------------------|
