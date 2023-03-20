@@ -31,7 +31,7 @@ jobs:
       run: python3 -m pytest --cov=tutorHub/server --cov-report=xml tutorHub/server/tests
     - uses: actions/upload-artifact@v2
       with:
-        path: ./tutorHub/server/coverage.xml
+        path: ./coverage.xml
   codecov-flask:
     name: CodeCov
     needs: build
