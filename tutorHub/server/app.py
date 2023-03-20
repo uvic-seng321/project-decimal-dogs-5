@@ -4,6 +4,7 @@ import json
 import sys
 import yaml
 from availability import get_schedule, add_single_booking
+from add_users import add_new_student
 
 #  List of tables: Students, Tutors, Subjects, Bookings, SubjectsRelationship 
 accessible_tables = ("Students",
@@ -71,6 +72,10 @@ def get_availability(tutor_id):
 @app.route('/addBooking', methods = ['POST'])
 def add_booking():
     return add_single_booking(request)
+
+@app.route('/addStudent', methods = ['POST'])
+def add_student():
+    return add_new_student(request)
 
 def create_app():
     app = Flask(__name__)
