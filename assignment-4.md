@@ -141,3 +141,16 @@ def test_student_exists():
     assert stu_id == 1
 ```
 ## Tracability Matrix
+| User Stories | test_get_tutor_price.py | test_set_tutor_price.py | test_add_booking.py | test_get_availability.py | test_get_subjects.py | test_show_subject.py | test_student_exists.py |
+|--------------|-----------------------|------------------------|---------------------|--------------------------|-----------------------|----------------------|-------------------------|
+| As a user, I want to be able to create an account. |  |  |  |  |  |  | ✔️ |
+| As a student, I want to be sure my tutor is qualified. |  |  |  |  |  |  |  |
+| As a student, I want to see what free assistance services are available. |  |  |  |  |  |  |  |
+| As a user, I want to be able to book a specific tutor. |  |  | ✔️ | ✔️ |  |  |  |
+| As a student, I want to find a tutor who can help me twice a week. |  |  |  |  |  |  |  |
+| As a tutor, I want to be able to advertise my services at a specific price. | ✔️ | ✔️ |  |  |  |  |  |
+| As a student, I want to find an in-person tutor. |  |  |  |  |  |  |  |
+| As a tutor, I want to be able to show my tutoring availability. |  |  |  | ✔️ |  |  |  |
+| As a tutor, I want to be able to easily show which subjects I can tutor. |  |  |  |  | ✔️ | ✔️ |  |
+| As a student, I want to be able to filter tutors based on the subjects they can tutor. |  |  |  |  |  |  |  |
+| As a student, I want to find a tutor for under a specified rate. |  |  |  |  |  |  |  |
