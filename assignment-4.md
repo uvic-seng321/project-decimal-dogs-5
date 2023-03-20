@@ -15,7 +15,6 @@ Here is a list of our must have user stories and a link to the acceptance criter
 ![image](./mappedDataModel.jpg)
 ## Backend design sketch:
 ![image](https://user-images.githubusercontent.com/91294558/226227576-5d8c6639-fe82-41fd-b2af-15b3756e761b.png)
-##
 
 ## Individual Acceptance Criteria
 ### As a user, I want to be able to book a specific tutor
@@ -154,3 +153,12 @@ def test_student_exists():
 | As a tutor, I want to be able to easily show which subjects I can tutor. |  |  |  |  | ✔️ | ✔️ |  |
 | As a student, I want to be able to filter tutors based on the subjects they can tutor. |  |  |  |  |  |  |  |
 | As a student, I want to find a tutor for under a specified rate. |  |  |  |  |  |  |  |
+
+## Discussion
+    Acceptance criteria outlines the expected behavior and functionality of a system being developed. While finding our user stories earlier in the course, we took the must-have user stories and broke them down into multiple smaller requirements that would make test driven development more feasible. That way we could start by making test cases for each acceptance criteria.
+
+    Test driven development helped us develop the backend of our program in many ways. Because we used test driven development, we were never concerned about how closely the program would follow the goals of the project as our test cases came directly from our criteria. We also found that once we had written code that passed the tests, there was not much debugging after, as there were no doubts that the code was following the test criteria. The one downside we found with test driven development was that we were exploring the structure of the initial tests. Sometimes, when the test was structured incorrectly, we would often look at potential issues in the code before looking at issues with the test.
+
+    As a team we felt it was very important to go over our test criteria at several points to ensure that what we had originally thought was feasible was still our best options. Overall, our test criteria changed very little throughout the development. Although we did add a few points to our test criteria to make it feasible for this section of the assignment, as well as obviously essential criteria we forgot before. We found that the criteria we initially created was very front end oriented, and it was difficult for us to create tests for the backend and ensure that the criteria was addressed. After making subtle additions to our preexisting criteria we felt that we were better set up for the next assignment, where we will be implementing the frontend.
+
+    Overall, while only about half the acceptance criteria was directly used to develop test cases for the backend of our program, it will allow us to create a more simple backend that will definitely make developing the front end easier.
