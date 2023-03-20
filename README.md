@@ -143,7 +143,8 @@ def test_student_exists():
 ```
 
 ### Integration Tests
-### Integrating getting tutor price and setting tutor price. 
+### Integrating getting tutor price and setting tutor price functions.
+This functionality should be tested to ensure getting and setting a tutor's price is functional together.
 Code: 
 ```python
 from app import * 
@@ -156,7 +157,8 @@ def test_integration_tutor_price():
     assert str(getTutorPrice(2)) == "40.0"
 ```
 
-### Integrating booking functionality with tutor availability
+### Integrating add_booking functionality with tutor availability.
+This functionality should be tested to ensure availabilities and bookings work together, as they are related.
 Code:
 ```python
 from app import *
@@ -201,4 +203,4 @@ Test driven development helped us develop the backend of our program in many way
 
 As a team we felt it was very important to go over our test criteria at several points to ensure that what we had originally thought was feasible was still our best options. Overall, our test criteria changed very little throughout the development. Although we did add a few points to our test criteria to make it feasible for this section of the assignment, as well as obviously essential criteria we forgot before. We found that the criteria we initially created was very front end oriented, and it was difficult for us to create tests for the backend and ensure that the criteria was addressed. After making subtle additions to our preexisting criteria we felt that we were better set up for the next assignment, where we will be implementing the frontend.
 
-Overall, while only about half the acceptance criteria was directly used to develop test cases for the backend of our program, it will allow us to create a more simple backend that will definitely make developing the front end easier.
+Overall, we felt by slightly restructuring our acceptance criteria we were able to better grasp what was needed for the backend portion of the project. With this, we will also have good structure for the frontend portion in the future.
