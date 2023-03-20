@@ -1,8 +1,9 @@
-from flask import Flask
+from flask import Flask, request
 import mysql.connector
 import json
 import sys
 import yaml
+from availability import get_schedule, add_single_booking
 from tutor_price import getTutorPrice, setTutorPrice
 
 #  List of tables: Students, Tutors, Subjects, Bookings, SubjectsRelationship 
@@ -58,7 +59,7 @@ def return_table(table):
         row = dict(zip(column_names, row))
         result[i] = row
     # return result
-    return json.dumps(result)
+    return result
     
 @app.route('/getTutorPrice/<int:id>')
 def get_tutor_price(id):
@@ -76,6 +77,14 @@ def set_tutor_price(id, price):
 @app.route('/')
 def hello_world():
     return "Hello, World!"
+
+@app.route('/getAvailability/<tutor_id>')
+def get_availability(tutor_id):
+    return get_schedule(tutor_id)
+
+@app.route('/addBooking', methods = ['POST'])
+def add_booking():
+    return add_single_booking(request)
 
 def create_app():
     app = Flask(__name__)
