@@ -36,7 +36,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - uses: actions/download-artifact@v2
-      with:
+        with:
           path: ./tutorHub/server/coverage.xml
       - uses: codecov/codecov-action@v3
         with:
