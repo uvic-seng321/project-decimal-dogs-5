@@ -4,6 +4,7 @@ import json
 import sys
 import yaml
 from availability import get_schedule, add_single_booking
+from tutor_price import getTutorPrice, setTutorPrice
 
 #  List of tables: Students, Tutors, Subjects, Bookings, SubjectsRelationship 
 accessible_tables = ("Students",
@@ -34,7 +35,8 @@ def send_query(query):
         return list(result)
     except:
         return 0
-    
+
+
 def get_columns(table):
     columns = []
     query = f"SHOW COLUMNS FROM {table};"
@@ -59,6 +61,18 @@ def return_table(table):
     # return result
     return result
     
+@app.route('/getTutorPrice/<int:id>')
+def get_tutor_price(id):
+    """Returns the tutor price"""
+    data = getTutorPrice(id)
+    return json.dumps(data)
+
+@app.route('/setTutorPrice/<int:id>/<float:price>')
+def set_tutor_price(id, price):
+    """Sets the tutor price"""
+    data = setTutorPrice(id, price)
+    return json.dumps(data)
+
 
 @app.route('/')
 def hello_world():
