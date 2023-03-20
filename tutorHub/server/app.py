@@ -19,7 +19,7 @@ app = Flask(__name__)
 db = mysql.connector.connect(
     host='70.67.13.107', 
     user='remote_user', 
-    password='Password123#@!', 
+    password='Password1!', 
     database='seng321'
     )
 
