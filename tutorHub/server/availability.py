@@ -2,7 +2,6 @@ from flask import Flask
 import mysql.connector
 import json
 from datetime import datetime
-# from app import send_query
 
 db = mysql.connector.connect(
 host='70.67.13.107', 

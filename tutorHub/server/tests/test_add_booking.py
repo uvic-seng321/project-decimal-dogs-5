@@ -16,3 +16,4 @@ def test_add_booking():
     result = app.test_client().get('/getAvailability/1')
     
     assert date.strftime("%d %b %Y") in result.data.decode()
+    
