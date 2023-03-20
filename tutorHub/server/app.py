@@ -4,7 +4,8 @@ import json
 import sys
 import yaml
 from availability import get_schedule, add_single_booking
-from add_users import add_new_student
+from add_users import add_new_student, add_new_tutor
+from new_users import get_student_id, get_tutor_id
 
 #  List of tables: Students, Tutors, Subjects, Bookings, SubjectsRelationship 
 accessible_tables = ("Students",
@@ -59,15 +60,18 @@ def return_table(table):
         result[i] = row
     # return result
     return result
-    
-
-@app.route('/')
-def hello_world():
-    return "Hello, World!"
 
 @app.route('/getAvailability/<tutor_id>')
 def get_availability(tutor_id):
     return get_schedule(tutor_id)
+
+@app.route('/getStudentID/<name>')
+def get_student_id_by_name(name):
+    return get_student_id(name)
+
+@app.route('/getTutorID/<name>')
+def get_tutor_id_by_name(name):
+    return get_tutor_id(name)
 
 @app.route('/addBooking', methods = ['POST'])
 def add_booking():
@@ -76,6 +80,10 @@ def add_booking():
 @app.route('/addStudent', methods = ['POST'])
 def add_student():
     return add_new_student(request)
+
+@app.route('/addTutor', methods = ['POST'])
+def add_tutor():
+    return add_new_tutor(request)
 
 def create_app():
     app = Flask(__name__)

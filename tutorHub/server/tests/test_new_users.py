@@ -13,7 +13,6 @@ def test_tutor_exists():
 
 def test_add_student():
     data_json = {
-        "id": 3,
         "email": "test@test.com",
         "name": "johnson smith",
         "password": "password345"
@@ -23,11 +22,10 @@ def test_add_student():
 
     stu_id = get_student_id("johnson smith")
 
-    assert stu_id == 3
+    assert stu_id
 
 def test_add_tutor():
     data_json = {
-        "id": 3,
         "name": "johnson smith",
         "email": "test@test.com",
         "price": 40.0,
@@ -40,8 +38,8 @@ def test_add_tutor():
         "Sunday": "10:00-14:00"
     }
 
-    app.test_client().post('/addStudent', json=data_json)
+    app.test_client().post('/addTutor', json=data_json)
 
-    stu_id = get_student_id("johnson smith")
+    tut_id = get_tutor_id("johnson smith")
 
-    assert stu_id == 3
+    assert tut_id
