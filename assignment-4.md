@@ -11,13 +11,13 @@ Here is a list of our must have user stories and a link to the acceptance criter
 [As a tutor, I want to be able to easily show which subjects I can tutor](https://github.com/uvic-seng321/project-decimal-dogs-5/issues/5) \
 [As a user, I want to be able to create an account](https://github.com/uvic-seng321/project-decimal-dogs-5/issues/26)
 
-## Data model sketch:
+## Data Model Sketch:
 ![image](./mappedDataModel.jpg)
-## Backend design sketch:
+## Backend Design Sketch:
 ![image](https://user-images.githubusercontent.com/91294558/226227576-5d8c6639-fe82-41fd-b2af-15b3756e761b.png)
 
 ## Individual Acceptance Criteria
-### As a user, I want to be able to book a specific tutor
+### As a user, I want to be able to book a specific tutor.
 Tutor availability should be updated when a tutor is booked:
 ```python
 from app import *
@@ -57,7 +57,7 @@ def test_get_availability():
 ```
 When a tutor is booked, an email should be displayed: Not tested as this is a frontend feature
 
-### As a tutor, I want to be able to advertise my services at a specific price
+### As a tutor, I want to be able to advertise my services at a specific price.
 Price is in the correct currency (CAD): Not the currency part, but getting the price test is below
 ```python
 from app import *
@@ -74,7 +74,7 @@ def test_set_tutor_price():
 ```
 If I lower the price it should show what the previous price was to make my ad more enticing: Not tested as this is a frontend feature
 
-### As a tutor, I want to be able to show my tutoring availability
+### As a tutor, I want to be able to show my tutoring availability.
 Must correctly show tutor availability:
 ```python
 from app import *
@@ -107,7 +107,7 @@ def test_get_availability():
 ```
 Must display in calendar view: This will be a frontend feature
 
-### As a tutor, I want to be able to easily show which subjects I can tutor
+### As a tutor, I want to be able to easily show which subjects I can tutor.
 Must be able to create a list of subjects: Not yet\
 Must be able to update the subjects I offer:
 ```python
@@ -127,7 +127,7 @@ def test_show_subjects2():
     assert response == "CIVE"
 ```
 
-### As a user, I want to be able to create an account
+### As a user, I want to be able to create an account.
 Created account must show up in database:
 ```python
 import json
