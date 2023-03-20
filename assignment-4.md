@@ -12,7 +12,7 @@ Here is a list of our must have user stories and a link to the acceptance criter
 [As a user, I want to be able to create an account](https://github.com/uvic-seng321/project-decimal-dogs-5/issues/26)
 
 ## Data model sketch:
-![image](https://user-images.githubusercontent.com/91294558/226227549-79ca351e-6b66-48d2-9995-1642963a04b8.png)
+![image](./mappedDataModel.jpg)
 ## Backend design sketch:
 ![image](https://user-images.githubusercontent.com/91294558/226227576-5d8c6639-fe82-41fd-b2af-15b3756e761b.png)
 ##
