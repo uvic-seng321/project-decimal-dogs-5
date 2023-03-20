@@ -142,7 +142,7 @@ def test_student_exists():
     assert stu_id == 1
 ```
 
-### Integration Tests
+### Integration Tests:
 ### Integrating getting tutor price and setting tutor price functions.
 This functionality should be tested to ensure getting and setting a tutor's price is functional together.
 Code: 
