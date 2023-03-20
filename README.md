@@ -142,8 +142,8 @@ def test_student_exists():
     assert stu_id == 1
 ```
 
-##Integration Tests
-##Integrating getting tutor price and setting tutor price. 
+### Integration Tests
+### Integrating getting tutor price and setting tutor price. 
 Code: 
 ```python
 from app import * 
@@ -156,7 +156,7 @@ def test_integration_tutor_price():
     assert str(getTutorPrice(2)) == "40.0"
 ```
 
-###Integrating booking functionality with tutor availability
+### Integrating booking functionality with tutor availability
 Code:
 ```python
 from app import *
