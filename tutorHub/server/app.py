@@ -6,6 +6,7 @@ import yaml
 from availability import get_schedule, add_single_booking
 from add_users import add_new_student, add_new_tutor
 from new_users import get_student_id, get_tutor_id
+from tutor_price import getTutorPrice, setTutorPrice
 
 #  List of tables: Students, Tutors, Subjects, Bookings, SubjectsRelationship 
 accessible_tables = ("Students",
@@ -36,7 +37,8 @@ def send_query(query):
         return list(result)
     except:
         return 0
-    
+
+
 def get_columns(table):
     columns = []
     query = f"SHOW COLUMNS FROM {table};"
@@ -60,6 +62,18 @@ def return_table(table):
         result[i] = row
     # return result
     return result
+
+@app.route('/getTutorPrice/<int:id>')
+def get_tutor_price(id):
+    """Returns the tutor price"""
+    data = getTutorPrice(id)
+    return json.dumps(data)
+
+@app.route('/setTutorPrice/<int:id>/<float:price>')
+def set_tutor_price(id, price):
+    """Sets the tutor price"""
+    data = setTutorPrice(id, price)
+    return json.dumps(data)
 
 @app.route('/getAvailability/<tutor_id>')
 def get_availability(tutor_id):
