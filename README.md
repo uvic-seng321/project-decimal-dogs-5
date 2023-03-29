@@ -141,6 +141,46 @@ def test_student_exists():
     
     assert stu_id == 1
 ```
+
+### Integration Tests:
+### Integrating getting tutor price and setting tutor price functions.
+This functionality should be tested to ensure getting and setting a tutor's price is functional together.
+Code: 
+```python
+from app import * 
+#Tutor's 1 price is 30.0, then 10 is added and is set as Tutor 2's price
+#This integration test checks both getTutorPrice and setTutorPrice functionality
+def test_integration_tutor_price():
+    response = app.test_client().get('/getTutorPrice/1')
+    response = eval(response.data.decode()) + 10
+    app.test_client().get('/setTutorPrice/2/' + str(response))
+    assert str(getTutorPrice(2)) == "40.0"
+```
+
+### Integrating add_booking functionality with tutor availability.
+This functionality should be tested to ensure availabilities and bookings work together, as they are related.
+Code:
+```python
+from app import *
+from datetime import datetime
+
+def test_add_booking():
+    date = datetime.now()
+
+    data_json = {
+        "tutorID": 1,
+        "studentID": 1,
+        "date": date.strftime("%Y-%m-%d %H:%M:%S"),
+        "startTime": "10:00",
+        "endTime": "11:00"
+    }
+
+    app.test_client().post('/addBooking', json=data_json)
+    result = app.test_client().get('/getAvailability/1')
+    
+    assert date.strftime("%d %b %Y") in result.data.decode()
+```    
+
 ## Tracability Matrix
 | User Stories | test_get_tutor_price.py | test_set_tutor_price.py | test_add_booking.py | test_get_availability.py | test_get_subjects.py | test_show_subject.py | test_student_exists.py |
 |--------------|-----------------------|------------------------|---------------------|--------------------------|-----------------------|----------------------|-------------------------|
@@ -157,10 +197,14 @@ def test_student_exists():
 | As a student, I want to find a tutor for under a specified rate. |  |  |  |  |  |  |  |
 
 ## Discussion
-Acceptance criteria outlines the expected behavior and functionality of a system being developed. While finding our user stories earlier in the course, we took the must-have user stories and broke them down into multiple smaller requirements that would make test driven development more feasible. That way we could start by making test cases for each acceptance criteria.
+Acceptance criteria outlines the expected behavior and functionality of a system being developed. While finding our user stories earlier in the course, we took the must-have user stories and broke them down into multiple smaller requirements that would make test-driven development more feasible. That way we could start by creating test cases for each acceptance criterion.
 
-Test driven development helped us develop the backend of our program in many ways. Because we used test driven development, we were never concerned about how closely the program would follow the goals of the project as our test cases came directly from our criteria. We also found that once we had written code that passed the tests, there was not much debugging after, as there were no doubts that the code was following the test criteria. The one downside we found with test driven development was that we were exploring the structure of the initial tests. Sometimes, when the test was structured incorrectly, we would often look at potential issues in the code before looking at issues with the test.
+Test-driven development helped us develop the backend of our program in many ways. Because we used test-driven development, we were never concerned about how closely the program would follow the goals of the project as our test cases came directly from our criteria. We also found that once we had written code that passed the tests, there was not much debugging after, as there were no doubts that the code was following the test criteria. The one downside we found with test-driven development was that we were exploring the structure of the initial tests. Sometimes, when the test was structured incorrectly, we would often look at potential issues in the code before looking at issues with the test.
 
-As a team we felt it was very important to go over our test criteria at several points to ensure that what we had originally thought was feasible was still our best options. Overall, our test criteria changed very little throughout the development. Although we did add a few points to our test criteria to make it feasible for this section of the assignment, as well as obviously essential criteria we forgot before. We found that the criteria we initially created was very front end oriented, and it was difficult for us to create tests for the backend and ensure that the criteria was addressed. After making subtle additions to our preexisting criteria we felt that we were better set up for the next assignment, where we will be implementing the frontend.
+GitHub actions was used to run our tests with each push and pull from our main branch to ensure no failing code can be pushed to main. This allows us to use some continuous integration principals, while ultimately still requiring a secondary approval before merging any PR, it sped up the process greatly since no one was worried about if the code was actually functional or not. Since we were following TDD practices, we can be sure our code will always have at least unit tests to ensure code is functioning.
 
-Overall, while only about half the acceptance criteria was directly used to develop test cases for the backend of our program, it will allow us to create a more simple backend that will definitely make developing the front end easier.
+As a team we felt it was very important to go over our test criteria at several points to ensure that our best options were still feasible. Overall, our test criteria changed very little throughout the development, with the exception of the added acceptance criteria that we must be able to create a user. All of our previous user stories worked under the assumption that the user already existed, so we had to create a new must-have story that allows user creation.
+
+We added a few other smaller points to our test criteria to make it feasible for this section of the assignment, as well as some obviously essential criteria we forgot before. We found that the criteria we initially created was very front end oriented, and it was difficult for us to create tests for the backend and ensure that the criteria was addressed. After making subtle additions to our preexisting criteria we felt that we were better set up for the next assignment, where we will be implementing the frontend.
+
+Overall, we felt by slightly restructuring our acceptance criteria we were able to better grasp what was needed for the backend portion of the project. With this, we will also have good structure for the frontend portion in the future.
