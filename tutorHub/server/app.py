@@ -22,7 +22,15 @@ db = mysql.connector.connect(
     password='Password123#@!', 
     database='seng321'
     )
-
+def insert_query(query):
+    db.reconnect()
+    cur = db.cursor()
+    try:
+        cur.execute(query)
+        db.commit()
+    except:
+        return 0
+    
 def send_query(query):
     """Sends a query to the database and returns the result as a list of tuples"""
     db.reconnect()
