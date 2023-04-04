@@ -20,11 +20,12 @@ app = Flask(__name__)
 ##Configure db
 # Load database credentials from db.yaml
 # Connect to the database
+db = yaml.load(open('db.yaml'), Loader=yaml.FullLoader)
 db = mysql.connector.connect(
-    host='70.67.13.107', 
-    user='remote_user', 
-    password='Password1!', 
-    database='seng321'
+    host=db['mysql_host'], 
+    user=db['mysql_user'], 
+    password=db['mysql_password'], 
+    database=db['mysql_db']
     )
 
 def send_query(query):

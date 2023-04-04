@@ -16,7 +16,9 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
-
+    defaults:
+      run:
+        working-directory: ./tutorHub/server
     steps:
     - uses: actions/checkout@v3
     - name: Set up Python 3.10
