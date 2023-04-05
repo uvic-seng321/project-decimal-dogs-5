@@ -80,6 +80,7 @@ def hello_world():
 
 @app.route('/getAvailability/<tutor_id>')
 def get_availability(tutor_id):
+    print("hello")
     return get_schedule(tutor_id)
 
 @app.route('/addBooking', methods = ['POST'])
