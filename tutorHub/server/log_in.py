@@ -6,7 +6,7 @@ def log_in_student(email, password):
     student = send_query(query)
     if student == 0:
         # this is error case
-        raise ValueError("Email or password are incorrect, please try again")
+        return "Incorrect email or password", 401
     else:
         return student
         # login stuff here i can't redo this quickly sorry 
