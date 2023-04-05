@@ -77,6 +77,7 @@ def set_tutor_price(id, price):
 
 @app.route('/getAvailability/<tutor_id>')
 def get_availability(tutor_id):
+    print("hello")
     return get_schedule(tutor_id)
 
 @app.route('/getStudentID/<name>')

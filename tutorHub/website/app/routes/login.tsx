@@ -103,10 +103,11 @@ const badRequest = (data: any) =>
       const actionData = useActionData();
       const [searchParams] = useSearchParams();
       return (
-          <div className="flex justify-center items-center content-center text-white">
-              <div className="lg:m-10 my-10 md:w-2/3 lg:w-1/2 bg-gradient-to-br from-orange-500 via-orange-300 to-orange-500 font-bold px-5 py-6 rounded-md">
+          <div className=" bg-gradient-to-br from-orange-100 via-neutral-100 to-orange-100 w-screen h-screen flex justify-center items-center content-center text-white">
+              <div className="transition-all hover:scale-110 duration-1000 hover:-skew-y-12 skew-y-12 hover:-skew-x-12 skew-x-12 hover:shadow-2xl bg-orange-500 font-bold px-5 py-6 rounded-md">
+              {/* <div className="bg-orange-500 font-bold px-5 py-6 rounded-md"> */}
                   <form method="post">
-                      <h1 className="text-center text-2xl text-white">Login</h1>
+                      <h1 className="text-center text-2xl text-white mb-2">Login</h1>
                       <input
                           type="hidden"
                           name="redirectTo"
@@ -114,7 +115,7 @@ const badRequest = (data: any) =>
                               searchParams.get("redirectTo") || "/"
                           }
                       />
-                      <fieldset className="text-center">
+                      <fieldset className="w-100 justify-center flex space-between gap-x-8">
                           <legend className="sr-only">
                               Login or Register?
                           </legend>
@@ -210,7 +211,11 @@ const badRequest = (data: any) =>
                               </p>
                           ) : null}
                       </div>
-                      <button className="my-4 py-2 px-7 text-purple-500 font-bold border-2 hover:scale-105 border-purple-500 rounded-lg bg-white" type="submit">Login</button>
+                      <button 
+                        className="my-4 py-2 px-7 text-white font-bold hover:scale-105 rounded-lg bg-blue-500 shadow-lg"
+                        type="submit">
+                            Login
+                        </button>
                   </form>
               </div>
           </div>
