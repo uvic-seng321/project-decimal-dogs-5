@@ -33,7 +33,6 @@ const badRequest = (data: any) =>
 );
 
   export const action: ActionFunction = async ({ request }) => {
-    console.log("in action")
     const form = await request.formData();
     const loginType = form.get("loginType");
     const username = form.get("username");
@@ -68,18 +67,7 @@ const badRequest = (data: any) =>
             return createUserSession(user.id, redirectTo);
         }
         case "register": {
-            // const userExists = await db.user.findFirst({
-            //     where: { username },
-            // });
-            const userExists = false;
-            if (userExists) {
-                return badRequest({
-                    fields,
-                    formError: `User with username ${username} already exists`,
-                });
-            }
             const user = await register({ username, password });
-            // const user = {username: "username", password: "password ", id: 1} 
             if (!user) {
                 return badRequest({
                     fields,
@@ -104,7 +92,7 @@ const badRequest = (data: any) =>
       const [searchParams] = useSearchParams();
       return (
           <div className=" bg-gradient-to-br from-orange-100 via-neutral-100 to-orange-100 w-screen h-screen flex justify-center items-center content-center text-white">
-              <div className="transition-all hover:scale-110 duration-1000 hover:-skew-y-12 skew-y-12 hover:-skew-x-12 skew-x-12 hover:shadow-2xl bg-orange-500 font-bold px-5 py-6 rounded-md">
+              <div className="bg-orange-500 font-bold px-5 py-6 rounded-md shadow-2xl">
               {/* <div className="bg-orange-500 font-bold px-5 py-6 rounded-md"> */}
                   <form method="post">
                       <h1 className="text-center text-2xl text-white mb-2">Login</h1>
@@ -145,7 +133,7 @@ const badRequest = (data: any) =>
                           </label>
                       </fieldset>
                       <label className="text-lg leading-7 text-white">
-                          Username:
+                          Email:
                           <input
                               type="text"
                               className={inputClassName}

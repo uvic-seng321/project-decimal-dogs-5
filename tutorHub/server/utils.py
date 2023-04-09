@@ -8,6 +8,8 @@ def send_query(query):
     cur = db.cursor()
     try:
         cur.execute(query)
+        if query[:6].lower() == "insert":
+            db.commit()
         result = cur.fetchall()
         return list(result)
     except:

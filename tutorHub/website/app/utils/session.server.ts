@@ -87,12 +87,18 @@ export async function register({
   username,
   password,
 }: LoginForm) {
-//   const passwordHash = await bcrypt.hash(password, 10);
-//   const user = await db.user.create({
-//     data: { username, passwordHash },
-//   });
-  const user = {username: username, id: 1, password: password}
-  return { id: user.id, username };
+  const user = await fetch("http://localhost:5000/register", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({email: username, name:"hard coded name",  password: password}),
+  }).then((res) => {
+    if (res.status !== 200) return null;
+    return res.json();
+  });
+
+  return user ? { id: user.id, username} : null;
 }
 
 export async function login({
@@ -100,21 +106,18 @@ export async function login({
   password,
 }: LoginForm) {
 
-//   const user = await db.user.findUnique({
-//     where: { username },
-//   });
+  const user = await fetch("http://localhost:5000/login", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({email: username, password: password}),
+  }).then((res) => {
+    if (res.status != 200) return null;
+    return res.json()
+  });
 
-  const user = {username: username, id: 1, password: password}
-
-
-  if (!user) return null;
-//   const isCorrectPassword = await bcrypt.compare(
-//     password,
-//     user.passwordHash
-//   );
-  const isCorrectPassword = true
-  if (!isCorrectPassword) return null;
-  return { id: user.id, username };
+  return user ? { id: user.id, username: user.username } : null;
 }
 
 export async function logout(request: Request) {
