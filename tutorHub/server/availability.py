@@ -1,15 +1,10 @@
-from flask import Flask
+from flask import Flask, Blueprint, request
 import mysql.connector
 import json
 from datetime import datetime
+from db import get_db
 
-db = mysql.connector.connect(
-host='70.67.13.107', 
-user='remote_user', 
-password='Password1!', 
-database='seng321'
-)
-
+db = get_db()
 def get_schedule(id):
     db.reconnect()
     cur = db.cursor()

@@ -1,6 +1,10 @@
 '''log in and sign up students'''
-from app import send_query
+from flask import Flask, Blueprint, request
+from utils import send_query
 
+log_in_api = Blueprint('log_in_api', __name__)
+
+@log_in_api.route('/login', methods=['POST'])
 def log_in_student(email, password):
     '''log in students'''
     query = f"SELECT * FROM Students WHERE email = '{email}' AND password = '{password};"
@@ -12,7 +16,7 @@ def log_in_student(email, password):
         return student
         # login stuff here i can't redo this quickly sorry
 
-
+@log_in_api.route('/register', methods=['POST'])
 def register_student(email, name, password):
     '''resister students'''
     query = f"SELECT * FROM Students WHERE email = '{email}';"

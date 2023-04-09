@@ -1,4 +1,13 @@
 from flask import Flask, request
+
+app = Flask(__name__) 
+app.config.from_object('config.Config')
+with app.app_context():
+    import db 
+    db.init_app(app) 
+    db.get_db() 
+app.app_context().push() 
+
 import mysql.connector
 import json
 import sys
@@ -7,6 +16,10 @@ from availability import get_schedule, add_single_booking
 from add_users import add_new_student, add_new_tutor
 from new_users import get_student_id, get_tutor_id
 from tutor_price import getTutorPrice, setTutorPrice
+from add_users import users_api
+from log_in import log_in_api 
+from utils import send_query
+from db import get_db
 
 #  List of tables: Students, Tutors, Subjects, Bookings, SubjectsRelationship 
 accessible_tables = ("Students",
@@ -17,26 +30,14 @@ accessible_tables = ("Students",
 
 app = Flask(__name__)
 
+# Register blueprints so we can add routes in other files
+app.register_blueprint(users_api) 
+app.register_blueprint(log_in_api)
+
 ##Configure db
 # Load database credentials from db.yaml
 # Connect to the database
-db = mysql.connector.connect(
-    host='70.67.13.107', 
-    user='remote_user', 
-    password='Password1!', 
-    database='seng321'
-    )
-
-def send_query(query):
-    """Sends a query to the database and returns the result as a list of tuples"""
-    db.reconnect()
-    cur = db.cursor()
-    try:
-        cur.execute(query)
-        result = cur.fetchall()
-        return list(result)
-    except:
-        return 0
+db = get_db()
 
 
 def get_columns(table):
