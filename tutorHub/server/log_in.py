@@ -18,6 +18,22 @@ def log_in_student():
         return "Incorrect email or password", 401
     else:
         return {"id": student[0][0], "email": student[0][1], "name": student[0][2]}, 200
+    
+@log_in_api.route('/getUser/<id>')
+def get_user(id):
+    '''log in students'''
+
+    query = f"SELECT * FROM Students WHERE id='{id}';"
+    student = send_query(query)
+
+    tutorInfo = get_tutor_info(student[0][1])
+
+    if student == []:
+        return "User not found", 401
+    elif tutorInfo != None:
+        return {"id": student[0][0], "email": student[0][1], "username": student[0][2], tutorInfo: tutorInfo}, 200
+    else:
+        return {"id": student[0][0], "email": student[0][1], "username": student[0][2]}, 200
 
 @log_in_api.route('/register', methods=['POST'])
 def register_student():
@@ -37,3 +53,12 @@ def register_student():
         return {"email": email, "username": name, "id": id}, 200
     else:
         return "Email already in use", 409
+    
+def get_tutor_info(email):
+    '''get tutor info associated with email'''
+
+    query = f"SELECT * FROM Tutors WHERE email='{email}';"
+    tutor = send_query(query)
+    if tutor == []:
+        return None
+    return tutor
