@@ -52,11 +52,7 @@ export async function getUserId(request: Request) {
       return null;
     }
     try {
-    //   const user = await db.user.findUnique({
-    //     where: { id: userId },
-    //     select: { id: true, username: true },
-    //   });
-      const user = {username: "username", id: 1, password: "password"}
+      const user = await fetch(`http://localhost:5000/getUser/${userId}`).then((res) => res.json())
       return user;
     } catch {
       throw logout(request);
@@ -79,11 +75,13 @@ export async function getUserId(request: Request) {
   }
 
 type LoginForm = {
-  username: string;
+  email: string;
+  username?: string;
   password: string;
 };
 
 export async function register({
+  email,
   username,
   password,
 }: LoginForm) {
@@ -92,7 +90,7 @@ export async function register({
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({email: username, name:"hard coded name",  password: password}),
+    body: JSON.stringify({email, name: username,  password}),
   }).then((res) => {
     if (res.status !== 200) return null;
     return res.json();
@@ -102,7 +100,7 @@ export async function register({
 }
 
 export async function login({
-  username,
+  email,
   password,
 }: LoginForm) {
 
@@ -111,7 +109,7 @@ export async function login({
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({email: username, password: password}),
+    body: JSON.stringify({email: email, password: password}),
   }).then((res) => {
     if (res.status != 200) return null;
     return res.json()

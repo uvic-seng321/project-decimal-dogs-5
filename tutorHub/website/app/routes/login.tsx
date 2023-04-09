@@ -10,10 +10,11 @@ import type {
 import { createUserSession, login, register } from "~/utils/session.server";
 
 import { json } from "@remix-run/node";
+import { useState } from "react";
 
-function validateUsername(username: unknown) {
-    if (typeof username !== "string" || username.length < 3) {
-        return `Usernames must be at least 3 characters long`;
+function validateemail(email: unknown) {
+    if (typeof email !== "string" || email.length < 3) {
+        return `emails must be at least 3 characters long`;
     }
 }
 function validatePassword(password: unknown) {
@@ -35,39 +36,41 @@ const badRequest = (data: any) =>
   export const action: ActionFunction = async ({ request }) => {
     const form = await request.formData();
     const loginType = form.get("loginType");
-    const username = form.get("username");
+    const email = form.get("email");
     const password = form.get("password");
+    const username = form.get("name") || undefined;
     const redirectTo = validateUrl(form.get("redirectTo"));
     if (
         typeof loginType !== "string" ||
-        typeof username !== "string" ||
+        typeof email !== "string" ||
         typeof password !== "string" ||
+        (typeof username !== "string" && username !== undefined) ||
         typeof redirectTo !== "string"
     ) {
         return badRequest({
             formError: `Form not submitted correctly.`,
         });
     }
-    const fields = { loginType, username, password };
+    const fields = { loginType, email, password, username };
     const fieldErrors = {
-        username: validateUsername(username),
+        email: validateemail(email),
         password: validatePassword(password),
     };
     if (Object.values(fieldErrors).some(Boolean))
         return badRequest({ fieldErrors, fields });
     switch (loginType) {
         case "login": {
-            const user = await login({ username, password });
+            const user = await login({ email, password });
             if (!user) {
                 return badRequest({
                     fields,
-                    formError: `Username/Password combination is incorrect`,
+                    formError: `email/Password combination is incorrect`,
                 });
             }
             return createUserSession(user.id, redirectTo);
         }
         case "register": {
-            const user = await register({ username, password });
+            const user = await register({ email, username, password });
             if (!user) {
                 return badRequest({
                     fields,
@@ -90,10 +93,10 @@ const badRequest = (data: any) =>
   export default function LoginRoute() {
       const actionData = useActionData();
       const [searchParams] = useSearchParams();
+      const [type, setType] = useState("Login");
       return (
-          <div className=" bg-gradient-to-br from-orange-100 via-neutral-100 to-orange-100 w-screen h-screen flex justify-center items-center content-center text-white">
-              <div className="bg-orange-500 font-bold px-5 py-6 rounded-md shadow-2xl">
-              {/* <div className="bg-orange-500 font-bold px-5 py-6 rounded-md"> */}
+          <div className=" bg-gradient-to-br from-orange-100 via-neutral-100 to-orange-100 w-screen h-screen flex justify-center items-center text-white">
+              <div className="bg-orange-500 font-bold px-5 py-6 rounded-md shadow-2xl w-1/2">
                   <form method="post">
                       <h1 className="text-center text-2xl text-white mb-2">Login</h1>
                       <input
@@ -112,6 +115,7 @@ const badRequest = (data: any) =>
                                   type="radio"
                                   name="loginType"
                                   value="login"
+                                  onClick={() => setType("Login")}
                                   defaultChecked={
                                       !actionData?.fields?.loginType ||
                                       actionData?.fields?.loginType === "login"
@@ -124,6 +128,7 @@ const badRequest = (data: any) =>
                                   type="radio"
                                   name="loginType"
                                   value="register"
+                                  onClick={() => setType("Register")}
                                   defaultChecked={
                                       actionData?.fields?.loginType ===
                                       "register"
@@ -132,31 +137,59 @@ const badRequest = (data: any) =>
                               Register
                           </label>
                       </fieldset>
+                      {type == "Register" && <label className="text-lg leading-7 text-white">
+                          Name:
+                          <input
+                              type="text"
+                              className={inputClassName}
+                              name="name"
+                              required
+                              minLength={3}
+                              defaultValue={actionData?.fields?.email}
+                              aria-invalid={Boolean(
+                                  actionData?.fieldErrors?.email
+                              )}
+                              aria-errormessage={
+                                  actionData?.fieldErrors?.email
+                                      ? "name-error"
+                                      : undefined
+                              }
+                          />
+                          {actionData?.fieldErrors?.email ? (
+                              <p
+                                  className="text-red-500"
+                                  role="alert"
+                                  id="name-error"
+                              >
+                                  {actionData.fieldErrors.name}
+                              </p>
+                          ) : null}
+                      </label>}
                       <label className="text-lg leading-7 text-white">
                           Email:
                           <input
                               type="text"
                               className={inputClassName}
-                              name="username"
+                              name="email"
                               required
                               minLength={3}
-                              defaultValue={actionData?.fields?.username}
+                              defaultValue={actionData?.fields?.email}
                               aria-invalid={Boolean(
-                                  actionData?.fieldErrors?.username
+                                  actionData?.fieldErrors?.email
                               )}
                               aria-errormessage={
-                                  actionData?.fieldErrors?.username
-                                      ? "username-error"
+                                  actionData?.fieldErrors?.email
+                                      ? "email-error"
                                       : undefined
                               }
                           />
-                          {actionData?.fieldErrors?.username ? (
+                          {actionData?.fieldErrors?.email ? (
                               <p
                                   className="text-red-500"
                                   role="alert"
-                                  id="username-error"
+                                  id="email-error"
                               >
-                                  {actionData.fieldErrors.username}
+                                  {actionData.fieldErrors.email}
                               </p>
                           ) : null}
                       </label>
@@ -202,7 +235,7 @@ const badRequest = (data: any) =>
                       <button 
                         className="my-4 py-2 px-7 text-white font-bold hover:scale-105 rounded-lg bg-blue-500 shadow-lg"
                         type="submit">
-                            Login
+                            {type}
                         </button>
                   </form>
               </div>
