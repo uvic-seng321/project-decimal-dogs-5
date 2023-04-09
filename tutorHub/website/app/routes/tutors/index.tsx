@@ -4,33 +4,41 @@ import NavBar from '~/components/shared/Nav';
 import { getUser } from '~/utils/session.server';
 import Content from '~/components/shared/Content';
 import TutorPage from '../tutor/$tutorId';
-import { ErrorBoundaryComponent } from "@remix-run/node";
+import { ErrorBoundaryComponent, json, redirect } from "@remix-run/node";
 import type { LoaderArgs, LoaderFunction } from "@remix-run/node";
 import TutorCard from '~/components/TutorCard';
 
-let priceLoader: LoaderFunction = async ({params}: LoaderArgs) => {
-    let price = await fetch(`http://localhost:5000/getTutorPrice/${params.tutorId}`)
-    return price
-  };
-  
-  export const ErrorBoundary: ErrorBoundaryComponent = ({ error }) => {
-    return <div>ERROR: {error.message}</div>;
-  };
+export const loader = async ({ request }: any) => {
+  const user = await getUser(request);
+  if (!user) return redirect("/login");
+  const tutors = await fetch(`http://localhost:5000/getTutors`).then(res => res.json())
+  return json({
+    user, tutors
+  })
+};
 
+type tutor = {
+  email: string;
+  name: string;
+  tutorID: number;
+  price: number;
+};
 
-const Index: React.FC = () => {
+export default function Index() {
+  const { user, tutors } = useLoaderData();
     return (
     <div className="min-h-screen bg-gradient-to-br from-orange-100 via-neutral-100 to-orange-100 flex flex-col bg-neutral-100">
         <NavBar />
-        {/* <h1 className="w-100 text-4xl text-center text-bla font-extrabold mb-4">Tutors Available</h1> */}
-        <div className="flex flex-wrap mx-auto">
-            <TutorCard/>
-            <TutorCard/>
-            <TutorCard/>
-            <TutorCard/>
+        <div className="flex items-center justify-center w-full px-1/6 pt-4">
+          <div className="grid grid-cols-3 gap-2">
+            {tutors.map((tutor: tutor) => {
+              console.log("tutor:")
+              console.log(tutor)
+              return <TutorCard tutor={tutor}/>
+            })}
+          </div>
         </div>
     </div>
     );
 }
 
-export default Index;

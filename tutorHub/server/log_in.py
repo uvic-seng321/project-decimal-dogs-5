@@ -31,7 +31,7 @@ def get_user(id):
     if student == []:
         return "User not found", 401
     elif tutorInfo != None:
-        return {"id": student[0][0], "email": student[0][1], "username": student[0][2], tutorInfo: tutorInfo}, 200
+        return {"id": student[0][0], "email": student[0][1], "username": student[0][2], "tutorInfo": tutorInfo}, 200
     else:
         return {"id": student[0][0], "email": student[0][1], "username": student[0][2]}, 200
 

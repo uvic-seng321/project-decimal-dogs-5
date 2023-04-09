@@ -20,8 +20,7 @@ export default function Index() {
 
   return (
     <div className="w-screen h-screen flex flex-col bg-gradient-to-br from-orange-100 via-neutral-100 to-orange-100">
-      <NavBar/>
-      {JSON.stringify(user)}
+      <NavBar />
       <div className="flex flex-col w-full h-full items-center justify-center font-bold">
         <div className="text-2xl font flex flex-col gap-y-4">
           <p className="">I need help with   
