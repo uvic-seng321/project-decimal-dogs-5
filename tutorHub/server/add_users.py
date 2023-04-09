@@ -1,15 +1,15 @@
-from flask import Flask
+'''add students and tutors, can be used for register'''
+from flask import Flask, Blueprint, request
 import mysql.connector
-import json
+from db import get_db
 
-db = mysql.connector.connect(
-host='70.67.13.107', 
-user='remote_user', 
-password='Password1!', 
-database='seng321'
-)
+db = get_db()
 
+users_api = Blueprint('users_api', __name__)
+
+@users_api.route('/add_student', methods=['POST'])
 def add_new_student(request):
+    '''add student user type into db'''
     email = request.json['email']
     name = request.json['name']
     password = request.json['password']
@@ -21,7 +21,9 @@ def add_new_student(request):
     db.commit()
     return {"status_code": 200}
 
+@users_api.route('/add_tutor', methods=['POST'])
 def add_new_tutor(request):
+    '''add new tutor'''
     name = request.json['name']
     email = request.json['email']
     price = request.json['price']

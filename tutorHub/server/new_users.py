@@ -1,23 +1,8 @@
+from flask import Flask, Blueprint, request
 import mysql.connector
-
-
-db = mysql.connector.connect(
-host='70.67.13.107', 
-user='remote_user', 
-password='Password1!', 
-database='seng321'
-)
-
-def send_query(query):
-    """Sends a query to the database and returns the result as a list of tuples"""
-    db.reconnect()
-    cur = db.cursor()
-    try:
-        cur.execute(query)
-        result = cur.fetchall()
-        return list(result)
-    except:
-        return 0
+from db import get_db
+from utils import send_query
+db = get_db()
 
 def get_student_id(name):
     query = f"SELECT id FROM Students WHERE name = '{name}';"
