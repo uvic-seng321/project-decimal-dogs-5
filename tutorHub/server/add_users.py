@@ -1,15 +1,15 @@
-from flask import Flask
+'''add students and tutors, can be used for register'''
 import mysql.connector
-import json
 
 db = mysql.connector.connect(
-host='70.67.13.107', 
-user='remote_user', 
-password='Password1!', 
+host='70.67.13.107',
+user='remote_user',
+password='Password1!',
 database='seng321'
 )
 
 def add_new_student(request):
+    '''add student user type into db'''
     email = request.json['email']
     name = request.json['name']
     password = request.json['password']
@@ -22,6 +22,7 @@ def add_new_student(request):
     return {"status_code": 200}
 
 def add_new_tutor(request):
+    '''add new tutor'''
     name = request.json['name']
     email = request.json['email']
     price = request.json['price']
