@@ -31,5 +31,9 @@
   },
   "engines": {
     "node": ">=14"
+  },
+  "cypress-cucumber-preprocessor": {
+    "nonGlobalStepDefinitions": true,
+    "stepDefinitions": ["cypress//e2e//[filepath].spec.ts"] 
   }
 }
