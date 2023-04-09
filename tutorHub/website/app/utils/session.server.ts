@@ -14,7 +14,7 @@ const storage = createCookieSessionStorage({
         // normally you want this to be `secure: true`
         // but that doesn't work on localhost for Safari
         // https://web.dev/when-to-use-local-https/
-        secure: true,
+        secure: process.env.NODE_ENV === "production",
         secrets: [sessionSecret],
         sameSite: "lax",
         path: "/",
@@ -52,7 +52,7 @@ export async function getUserId(request: Request) {
       return null;
     }
     try {
-      const user = await fetch(`http://localhost:5000/getUser/${userId}`).then((res) => res.json())
+      const user = await fetch(`http://127.0.0.1:5000/getUser/${userId}`).then((res) => res.json())
       return user;
     } catch {
       throw logout(request);
@@ -85,7 +85,7 @@ export async function register({
   username,
   password,
 }: LoginForm) {
-  const user = await fetch("http://localhost:5000/register", {
+  const user = await fetch("http://127.0.0.1:5000/register", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -104,7 +104,7 @@ export async function login({
   password,
 }: LoginForm) {
 
-  const user = await fetch("http://localhost:5000/login", {
+  const user = await fetch("http://127.0.0.1:5000/login", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

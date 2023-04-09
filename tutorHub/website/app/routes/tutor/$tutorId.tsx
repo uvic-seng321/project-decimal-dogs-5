@@ -5,7 +5,7 @@ import { ErrorBoundaryComponent } from "@remix-run/node";
 import Content from "~/components/shared/Content";
 
 export let loader: LoaderFunction = async ({params}: LoaderArgs) => {
-  let data = await fetch(`http://localhost:5000/getAvailability/${params.tutorId}`).then(res => res.json())
+  let data = await fetch(`http://127.0.0.1:5000/getAvailability/${params.tutorId}`).then(res => res.json())
   return data
   };
 
