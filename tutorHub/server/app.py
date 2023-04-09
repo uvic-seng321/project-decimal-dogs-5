@@ -16,6 +16,7 @@ from availability import get_schedule, add_single_booking
 from add_users import add_new_student, add_new_tutor
 from new_users import get_student_id, get_tutor_id
 from tutor_price import getTutorPrice, setTutorPrice
+from get_tutors import getTutors
 from add_users import users_api
 from log_in import log_in_api 
 from utils import send_query
@@ -69,6 +70,11 @@ def get_tutor_price(id):
     """Returns the tutor price"""
     data = getTutorPrice(id)
     return json.dumps(data)
+
+@app.route('/getTutors')
+def get_tutors():
+    """Returns all the tutors"""
+    return getTutors()
 
 @app.route('/setTutorPrice/<int:id>/<float:price>')
 def set_tutor_price(id, price):
