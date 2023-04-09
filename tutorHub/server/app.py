@@ -1,4 +1,13 @@
 from flask import Flask, request
+
+app = Flask(__name__) 
+app.config.from_object('config.Config')
+with app.app_context():
+    import db 
+    db.init_app(app) 
+    db.get_db() 
+app.app_context().push() 
+
 import mysql.connector
 import json
 import sys
