@@ -40,4 +40,4 @@ def add_new_tutor(request):
     query = f"INSERT INTO Tutors (name, email, price, monday, tuesday, wednesday, thursday, friday, saturday, sunday) VALUES ('{name}', '{email}', {price}, '{monday}', '{tuesday}', '{wednesday}', '{thursday}', '{friday}', '{saturday}', '{sunday}');"
     cur.execute(query)
     db.commit()
-    return {"status_code": 200}
+    return 200
