@@ -16,13 +16,12 @@ def get_schedule(id):
 def add_single_booking(request):
     tutorId = request.json['tutorID']
     studentId = request.json['studentID']
-    date = request.json['date']
     startTime = request.json['startTime']
     endTime = request.json['endTime']
 
     db.reconnect()
     cur = db.cursor()
-    query = f"INSERT INTO Bookings (tutorid, studentid, date, starttime, endtime) VALUES ({tutorId}, {studentId}, '{date}', '{startTime}', '{endTime}');"
+    query = f"INSERT INTO Bookings (tutorid, studentid, starttime, endtime) VALUES ({tutorId}, {studentId}, '{startTime}', '{endTime}');"
     cur.execute(query)
     db.commit()
     return {"status_code": 200}
@@ -33,7 +32,16 @@ def get_bookings(cursor, tutorID):
     query = f"SELECT * FROM Bookings WHERE tutorID = {tutorID};"
     cursor.execute(query)
     result = cursor.fetchall()
-    return result
+    bookings = []
+    for booking in result:
+        bookings.append({
+            "bookingID": booking[0],
+            "tutorID": booking[1],
+            "studentID": booking[2],
+            "startTime": booking[3],
+            "endTime": booking[4]
+        })
+    return bookings
 
 def get_weekly(cursor, tutorID):
     query = f"SELECT * FROM Tutors WHERE tutorID = {tutorID};"

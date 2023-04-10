@@ -126,3 +126,23 @@ export async function logout(request: Request) {
     },
   });
 }
+
+export async function registerUserAsTutor(data: any) {
+  const status = await fetch("http://127.0.0.1:5000/addTutor", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      ...data,
+      Sunday: [],
+      Monday: [],
+      Tuesday: [],
+      Wednesday: [],
+      Thursday: [],
+      Friday: [],
+      Saturday: []
+    }),
+  }).then((res) => {return res.status});
+  return status;
+}
