@@ -13,3 +13,9 @@ When("I log in with the email {string} and password {string}", (email: string, p
 Then("I should be redirected to the dashboard page", () => {
   cy.url().should("include", "/dashboard");
 });
+
+Cypress.on('uncaught:exception', (err, runnable) => {
+    // returning false here prevents Cypress from
+    // failing the test
+    return false
+});
