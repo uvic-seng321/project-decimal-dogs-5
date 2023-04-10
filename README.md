@@ -1,3 +1,5 @@
+[![Python application](https://github.com/uvic-seng321/project-decimal-dogs-5/actions/workflows/python-app.yml/badge.svg)](https://github.com/uvic-seng321/project-decimal-dogs-5/actions/workflows/python-app.yml)
+
 ### Installation:
 1. Clone this repository 
 2. Navigate to the /tutor/server directory
