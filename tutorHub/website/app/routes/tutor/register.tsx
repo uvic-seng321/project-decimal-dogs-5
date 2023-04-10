@@ -34,7 +34,7 @@ export const action: ActionFunction = async ({ request }: any)  => {
   const data = {price: price, name: "tutor name", email: user.email}
 
   const status = registerUserAsTutor(data);
-  return redirect("http://localhost:3000");
+  return redirect("http://127.0.0.1:3000");
 };
 
 // export const action: ActionFunction = async ({ request }) => {
