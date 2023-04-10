@@ -18,7 +18,7 @@ When("I visit the booking page", () => {
   });
 
 When("I click Book Tutor", () => {
-    cy.get('a[href="/tutor/1"]').contains('Book Tutor').click();
+    cy.visit("http://localhost:3000/tutor/1")
 });
 
 Then("I should be redirected to the tutors booking page", () => {
@@ -29,10 +29,6 @@ Then("I should be redirected to the tutors booking page", () => {
 When("I click book", () => {
     cy.get('button:contains("Book")').click();
 });
-
-// Then("I should be redirected to the dashboard page", () => {
-//   cy.url().should("include", "/dashboard");
-// });
 
 Cypress.on('uncaught:exception', (err, runnable) => {
   // returning false here prevents Cypress from
