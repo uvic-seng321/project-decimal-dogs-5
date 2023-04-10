@@ -1,5 +1,5 @@
 import { useParams, useLoaderData } from "@remix-run/react";
-import type { LoaderArgs, LoaderFunction } from "@remix-run/node";
+import { LoaderArgs, LoaderFunction, redirect } from "@remix-run/node";
 import NavBar from "~/components/shared/Nav";
 import { ErrorBoundaryComponent } from "@remix-run/node";
 import Content from "~/components/shared/Content";
@@ -7,6 +7,7 @@ import TutorCalendar from "~/components/shared/Calendar";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import { startCase } from "cypress/types/lodash";
 import { useState } from "react";
+import { getUser, registerUserAsTutor } from "~/utils/session.server";
 
 
 type data = any
@@ -18,38 +19,39 @@ type Event = {
   end: Date;
 };
 
-export let loader: LoaderFunction = async ({params}: LoaderArgs) => {
-  let data = await fetch(`http://127.0.0.1:5000/getAvailability/${params.tutorId}`)
-  return data
-  };
+export let loader: LoaderFunction = async ({ request }: any) => {
+  const user = await getUser(request);
+  return { user }
+};
 
   export const ErrorBoundary: ErrorBoundaryComponent = ({ error }) => {
     return <div>ERROR: {error.message}</div>;
   };
   
   export default function TutorPage() {
-  const data = useLoaderData();
+  const {user} = useLoaderData();
   const [price, setPrice] = useState(0);
   const [subject, setSubject] = useState<any>([]);
   const [subjects, setSubjects] = useState<string[]>([]);
   const [startTime, setStartTime] = useState("8:00");
   const [endTime, setEndTime] = useState("20:00");
 
-  const [events, setEvents] = useState(data?.bookings?.map((booking: any, index: any) => {
-    return {
-      id: index,
-      title: "Booked",
-      start: new Date(booking.startTime),
-      end: new Date(booking.endTime)
-    }
-  }));
+  const [events, setEvents] = useState<any>();
   
   const handleAddEvent = () => {
     setEvents([ ...events, {id: events.length(), title: "Busy", start: new Date(startTime), end: new Date(endTime)}])
   }
 
-  const handleRegister = () => {
-
+  const handleRegister = async () => {
+    const data = {price: price, name: user.name, email: user.email}
+    alert("before")
+    const status = await registerUserAsTutor(data)
+    alert("AFTER")
+      if (status == 200) {
+        alert("Registered as a tutor!")
+      } else {
+        alert("Something went wrong")
+      }
   }
 
   return (
