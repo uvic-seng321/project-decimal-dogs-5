@@ -1,11 +1,8 @@
 import React from "react";
 import { Calendar, View, momentLocalizer } from "react-big-calendar";
-import "./react-big-calendar.css";
 import moment from "moment";
 
 const localizer = momentLocalizer(moment);
-
-const allViews: View[] = ["month", "week", "day"];
 
 type Event = {
   id: string;
@@ -20,24 +17,16 @@ type Props = {
 
 const TutorCalendar: React.FC<Props> = ({ events }) => {
   return (
-    <div>
       <Calendar
         localizer={localizer}
         events={events}
-        defaultView="month" 
-        views={allViews}
+        defaultView="week" 
+        views={["month", "week"]}
         startAccessor="start"
         endAccessor="end"
         titleAccessor={(event) => event.title}
-        style={{ height: '500px'}}
-        eventPropGetter={(event) => ({
-          style: {
-            backgroundColor: "blue",
-            color: "white",
-          },
-        })}
+        style={{ height: "450px"}}
       />
-    </div>
   );
 };
 

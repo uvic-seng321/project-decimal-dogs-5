@@ -3,54 +3,87 @@ import type { LoaderArgs, LoaderFunction } from "@remix-run/node";
 import NavBar from "~/components/shared/Nav";
 import { ErrorBoundaryComponent } from "@remix-run/node";
 import Content from "~/components/shared/Content";
+import TutorCalendar from "~/components/shared/Calendar";
+import "react-big-calendar/lib/css/react-big-calendar.css";
+import { startCase } from "cypress/types/lodash";
+import { useState } from "react";
+
+
+type data = any
+
+type Event = {
+  id: any;
+  title: string;
+  start: Date;
+  end: Date;
+};
 
 export let loader: LoaderFunction = async ({params}: LoaderArgs) => {
-  let data = await fetch(`http://localhost:5000/getAvailability/${params.tutorId}`)
+  let data = await fetch(`http://127.0.0.1:5000/getAvailability/${params.tutorId}`)
   return data
   };
 
   export const ErrorBoundary: ErrorBoundaryComponent = ({ error }) => {
     return <div>ERROR: {error.message}</div>;
   };
+  
+  export default function TutorPage() {
+  const data = useLoaderData();
+  const [price, setPrice] = useState(0);
+  const [subject, setSubject] = useState<any>([]);
+  const [subjects, setSubjects] = useState<string[]>([]);
+  const [startTime, setStartTime] = useState("8:00");
+  const [endTime, setEndTime] = useState("20:00");
 
-export default function TutorPage() {
-//   const data = useLoaderData();
+  const [events, setEvents] = useState(data?.bookings?.map((booking: any, index: any) => {
+    return {
+      id: index,
+      title: "Booked",
+      start: new Date(booking.startTime),
+      end: new Date(booking.endTime)
+    }
+  }));
+  
+  const handleAddEvent = () => {
+    setEvents([ ...events, {id: events.length(), title: "Busy", start: new Date(startTime), end: new Date(endTime)}])
+  }
+
+  const handleRegister = () => {
+
+  }
+
   return (
     <Content>
       <div className="w-full h-full grid grid-cols-4">
         <div className="col-span-3 h-full bg-orange-500 p-8 border-r-2 border-orange-600">
           <div className="bg-neutral-100 h-full w-full rounded-2xl">
-            {/* {JSON.stringify(data)} */}
+            <TutorCalendar events={events}/>
           </div>
         </div>
-        <div className="h-full bg-gradient-to-br from-orange-100 via-neutral-100 to-orange-100 flex flex-col p-8 pt-16">
+        <div className="h-full bg-gradient-to-br from-orange-100 via-neutral-100 to-orange-100 flex flex-col p-8 pt-2">
           <div className="flex space-between w-full items-center mb-auto">
             <div className="h-16 w-24 rounded-2xl bg-green-600 text-center text-white"></div>
             <p className="text-lg w-full text-center font-semibold">Scott Kenning</p>
           </div>
-            <label className="font-bold">Day:</label>
-            <select className="mb-1 shadow">
-              <option value="1">1</option>
-              <option value="1">1</option>
-            </select>
+            <label className="font-bold">Price per hour:</label>
+            <input type="number" className="mb-1 shadow" onChange={(e: any) => setPrice(e.target.value)}></input>
             <label className="font-bold">Start time:</label>
-            <select className="mb-1 shadow">
-              <option value="1">1</option>
-              <option value="1">1</option>
-            </select>
+            <input type="datetime-local" className="mb-1 shadow" onChange={(e: any) => setStartTime(e.target.value)}></input>
             <label className="font-bold">End time:</label>
-            <select className="mb-1 shadow">
-              <option value="1">1</option>
-              <option value="1">1</option>
-            </select>
-            <button className="shadow bg-blue-500 text-white font-bold rounded-lg p-2 mt-4 hover:scale-105 hover:bg-blue-400">Add block</button>
-            <button className="shadow bg-green-600 text-white font-bold rounded-lg p-2 mt-4 hover:scale-105 hover:bg-green-500">Finish and Register</button>
-
+            <input type="datetime-local" className="mb-1 shadow" onChange={(e: any) => setEndTime(e.target.value)}></input>
+            <button onClick={() => handleAddEvent()} className="shadow bg-blue-500 text-white font-bold rounded-lg p-2 my-1 hover:scale-105 hover:bg-blue-400">Add Unavailable Time</button>
+            <div className="my-4 flex flex-col gap-y-1">
+              <label className="font-bold w-full">Subject:</label>
+              <input type="text" className="" onChange={(e: any) => {setSubject(e.target.value)}}></input>
+              <button onClick={() => {
+                setSubjects([...subjects, subject]);
+                setSubject("");
+              }} className="shadow bg-blue-500 text-white font-bold rounded-lg p-2 hover:bg-blue-400">Add subject</button>
+            </div>
+            <p>Current Subjects: {subjects.map(subject => {return subject + ", "})}</p>
+            <button onClick={() => handleRegister()} className="shadow bg-green-600 text-white font-bold rounded-lg p-2 mt-2 hover:scale-105 hover:bg-green-500">Register</button>
         </div>
       </div>
     </Content>
     )
-  
-
 }
-  
