@@ -11,7 +11,7 @@ import TutorCard from '~/components/TutorCard';
 export const loader = async ({ request }: any) => {
   const user = await getUser(request);
   if (!user) return redirect("/login");
-  const tutors = await fetch(`http://localhost:5000/getTutors`).then(res => res.json())
+  const tutors = await fetch(`http://127.0.0.1:5000/getTutors`).then(res => res.json())
   return json({
     user, tutors
   })
