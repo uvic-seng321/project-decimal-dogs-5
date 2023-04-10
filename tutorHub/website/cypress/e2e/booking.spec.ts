@@ -4,7 +4,7 @@ Given("I visit the website {string}", (url: string) => {
   cy.visit(url);
 });
 
-When("When I click book", () => {
+When("I click book", () => {
     cy.wait(500);
     cy.get('button:contains("Book")').click();
 });
