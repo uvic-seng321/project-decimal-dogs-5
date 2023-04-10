@@ -143,6 +143,6 @@ export async function registerUserAsTutor(data: any) {
       Friday: [],
       Saturday: []
     }),
-  }).then((res) => {return res.status})
+  }).then((res) => {return res.status});
   return status;
 }
