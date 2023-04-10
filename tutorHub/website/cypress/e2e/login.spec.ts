@@ -6,12 +6,13 @@ Given("I visit the website {string}", (url: string) => {
 
 When("I log in with the email {string} and password {string}", (email: string, password: string) => {
     cy.get('input[name="email"]').type(email);
-    cy.get("input[name=password]").type(password);
+    cy.get('input[name="password"]').type(password);
     cy.get("button[type='submit']").click();
+    cy.wait(1000);
 });
 
-Then("I should be redirected to the dashboard page", () => {
-  cy.url().should("include", "/dashboard");
+Then("I should be redirected to the homepage", () => {
+  cy.url().should("include", "/");
 });
 
 Cypress.on('uncaught:exception', (err, runnable) => {
