@@ -38,11 +38,10 @@ def get_user(id):
 @log_in_api.route('/getTutor/<id>')
 def get_tutor(id):
     '''return tutor info'''
-
-    query = f"SELECT * FROM Tutors WHERE id='{id}';"
+    query = f"SELECT * FROM Tutors WHERE tutorId='{id}';"
     tutor = send_query(query)
 
-    if tutor == []:
+    if tutor == 0:
         return "Tutor not found", 401
     
     user_query = f'SELECT id FROM Students WHERE email={tutor[0][2]}'
@@ -52,7 +51,7 @@ def get_tutor(id):
         return "User not found", 401
     else:
         
-        return {"name": tutor[0][1], "email": tutor[0][2], "price": tutor[0][3], "userId": user_id[0][0], "tutorId": tutor[0][0]}, 200
+        return {"name": tutor[0][1], "email": tutor[0][2], "price": tutor[0][3], "userId": user_id[0], "tutorId": tutor[0][0]}, 200
 
 @log_in_api.route('/register', methods=['POST'])
 def register_student():

@@ -19,8 +19,10 @@ type Event = {
 };
 
 export let loader: LoaderFunction = async ({params}: LoaderArgs) => {
-  let data = await fetch(`http://127.0.0.1:5000/getAvailability/${params.tutorId}`)
-  return data
+  let availability = await fetch(`http://127.0.0.1:5000/getAvailability/${params.tutorId}`)
+  let userData = await fetch(`http://127.0.0.1:5000/getTutor/${params.tutorId}`)
+
+  return {availability, userData}
   };
 
   export const ErrorBoundary: ErrorBoundaryComponent = ({ error }) => {
@@ -28,11 +30,11 @@ export let loader: LoaderFunction = async ({params}: LoaderArgs) => {
   };
   
   export default function TutorPage() {
-  const data = useLoaderData();
+  const  {availability, userData }= useLoaderData();
   const [startTime, setStartTime] = useState("8:00");
   const [endTime, setEndTime] = useState("20:00");
 
-  const [events, setEvents] = useState(data?.bookings?.map((booking: any, index: any) => {
+  const [events, setEvents] = useState(availability?.bookings?.map((booking: any, index: any) => {
     return {
       id: index,
       title: "Booked",
@@ -56,7 +58,7 @@ export let loader: LoaderFunction = async ({params}: LoaderArgs) => {
         <div className="h-full bg-gradient-to-br from-orange-100 via-neutral-100 to-orange-100 flex flex-col p-8 pt-16">
           <div className="flex space-between w-full items-center mb-auto">
             <div className="h-16 w-24 rounded-2xl bg-green-600 text-center text-white"></div>
-            <p className="text-lg w-full text-center font-semibold">Scott Kenning</p>
+            <p className="text-lg w-full text-center font-semibold">{userData.name || "Book Session"}</p>
           </div>
             <label className="font-bold">Start time:</label>
             <input type="datetime-local" className="mb-4 shadow" onChange={(e: any) => setStartTime(e.target.value)}></input>

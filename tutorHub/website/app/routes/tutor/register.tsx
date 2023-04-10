@@ -64,10 +64,6 @@ export const action: ActionFunction = async ({ request }: any)  => {
     setEvents([ ...events, {id: events.length(), title: "Busy", start: new Date(startTime), end: new Date(endTime)}])
   }
 
-  // const handleRegister = async () => {
-    
-  // }
-
   return (
     <Content>
       <div className="w-full h-full grid grid-cols-4">
@@ -79,7 +75,7 @@ export const action: ActionFunction = async ({ request }: any)  => {
         <div className="h-full bg-gradient-to-br from-orange-100 via-neutral-100 to-orange-100 flex flex-col p-8 pt-2">
           <div className="flex space-between w-full items-center mb-auto">
             <div className="h-16 w-24 rounded-2xl bg-green-600 text-center text-white"></div>
-            <p className="text-lg w-full text-center font-semibold">Scott Kenning</p>
+            <p className="text-lg w-full text-center font-semibold">{user.name || "Register"}</p>
           </div>
             <label className="font-bold">Start time:</label>
             <input type="datetime-local" className="mb-1 shadow" onChange={(e: any) => setStartTime(e.target.value)}></input>
