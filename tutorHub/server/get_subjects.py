@@ -10,5 +10,7 @@ def show_subjects(email):
     tutor_id = send_query(query)
     # Get the subjects that the tutor teaches 
     query = f"SELECT coursecode FROM SubjectsRelationship WHERE tutorid = {tutor_id[0][0]};" 
-    subject_ids = send_query(query) 
+    subject_ids = send_query(query)
+    if subject_ids == []:
+        return []        
     return json.dumps(subject_ids[0][0]).replace('"', '')

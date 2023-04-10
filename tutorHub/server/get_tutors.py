@@ -12,13 +12,12 @@ def getTutors():
     cursor.execute(query)
     res = cursor.fetchall()
     for tutor in res:
-        email = tutor[2]
         tutor = {
             "tutorID": tutor[0],
             "name": tutor[1],
             "email": tutor[2],
             "price": tutor[3],
-            "subjects": show_subjects(email)
+            "subjects": show_subjects(tutor[2])
         }
         rows.append(tutor)
     return rows
