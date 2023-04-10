@@ -1,5 +1,3 @@
-### TODO: Rename to README.md and rename the current readme which is for A4
-
 ### Installation:
 1. In the /server directory, activate the venv virtual environment
 
