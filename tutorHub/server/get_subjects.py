@@ -1,5 +1,5 @@
 from flask import Flask, Blueprint, request
-from app import send_query
+from utils import send_query
 import json
 
 #Show all subjects for a given tutor by their email

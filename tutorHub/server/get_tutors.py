@@ -1,7 +1,6 @@
 from flask import Flask, Blueprint, request
 import mysql.connector
 from db import get_db
-from utils import send_query
 from get_subjects import show_subjects
 db = get_db()
 
@@ -13,13 +12,13 @@ def getTutors():
     cursor.execute(query)
     res = cursor.fetchall()
     for tutor in res:
-        subjects = show_subjects(tutor[2])
+        email = tutor[2]
         tutor = {
             "tutorID": tutor[0],
             "name": tutor[1],
             "email": tutor[2],
             "price": tutor[3],
-            "subjects": subjects
+            "subjects": show_subjects(email)
         }
         rows.append(tutor)
     return rows
